@@ -4,7 +4,7 @@ with Bi-Convex Relaxation</i></strong></h1>
 <a href="https://arxiv.org/abs/2407.13537"><img src="https://img.shields.io/badge/arXiv-2407.13537-b31b1b.svg"></a>
 <a href="https://bangyan101.github.io/GlobalPointer/"><img src="https://img.shields.io/badge/Project-Page-green.svg"/></a>
 
-This as an official implementation of our ECCV 2024 paper 
+This is an official implementation of our ECCV 2024 paper 
 [**GlobalPointer**: Large-Scale Plane Adjustment with Bi-Convex Relaxation]([https://lingzhezhao.github.io/BAD-Gaussians/](https://bangyan101.github.io/GlobalPointer/)).
 
 
