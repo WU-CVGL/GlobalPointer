@@ -16,7 +16,7 @@ function [lidar_pose_estimate_struct, lidar_pose_estimate_matrix, optimal_pose_v
 
     for lidar_pose_i = 1:param.lidar_pose_num
         [~, S, V] = svd(Y_list{1, lidar_pose_i});
-        A = S*V';
+        A = S * V';
         x_solution = A(1, :);
         x_solution = x_solution / x_solution(1, 13);
 
@@ -28,12 +28,12 @@ function [lidar_pose_estimate_struct, lidar_pose_estimate_matrix, optimal_pose_v
     end
 
     lidar_pose_estimate_matrix = cell(param.lidar_pose_num,1);
-    
+
     for lidar_pose_i = 1:param.lidar_pose_num
-        Tmp = zeros(4,4);
-        Tmp(1:3,1:3) = lidar_pose_estimate_struct(lidar_pose_i).R;
-        Tmp(1:3,4) = lidar_pose_estimate_struct(lidar_pose_i).t';
-        Tmp(4,4) = 1;
+        Tmp = zeros(4, 4);
+        Tmp(1:3, 1:3) = lidar_pose_estimate_struct(lidar_pose_i).R;
+        Tmp(1:3, 4) = lidar_pose_estimate_struct(lidar_pose_i).t';
+        Tmp(4, 4) = 1;
         lidar_pose_estimate_matrix{lidar_pose_i} = Tmp;
     end
 

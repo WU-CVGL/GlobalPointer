@@ -49,9 +49,9 @@ function [plane_struct, lidar_pose_struct, B_sets, point_cloud_cell] = generate_
     plane_struct_tmp.normal_placement_vector = cell(1, param.plane_num);
 
     for plane_i = 1:param.plane_num
-        basevec1 = rand(3,1) * 2 - 1;
+        basevec1 = rand(3, 1) * 2 - 1;
         basevec1 = basevec1 / norm(basevec1);
-        basevec2 = rand(3,1) * 2 - 1;
+        basevec2 = rand(3, 1) * 2 - 1;
         basevec2 = basevec2 / norm(basevec2);
         normalvec = cross(basevec1, basevec2);
         normalvec = normalvec / norm(normalvec);
@@ -87,7 +87,7 @@ function [plane_struct, lidar_pose_struct, B_sets, point_cloud_cell] = generate_
     for lidar_pose_i = 1:param.lidar_pose_num
         R = lidar_pose_struct(lidar_pose_i).R_gt;
         t = lidar_pose_struct(lidar_pose_i).t_gt;
-        
+
         for plane_i = 1:param.plane_num
             basevec1 = plane_struct_tmp.basevec1{1, plane_i};
             basevec2 = plane_struct_tmp.basevec2{1, plane_i};
@@ -101,7 +101,7 @@ function [plane_struct, lidar_pose_struct, B_sets, point_cloud_cell] = generate_
 
             % outlier
             point_cloud_cell{lidar_pose_i, plane_i} = point_cloud_local;
-            point_local_homo = [point_cloud_local, ones(size(point_cloud_local,1),1)];
+            point_local_homo = [point_cloud_local, ones(size(point_cloud_local, 1), 1)];
             B_sets{lidar_pose_i, plane_i} = point_local_homo' * point_local_homo;
         end 
     end

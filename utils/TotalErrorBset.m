@@ -21,15 +21,15 @@ function total_error = TotalErrorBset(pose, B_sets, plane, param)
     for lidar_pose_i = 1:lidar_pose_num
         R = pose(lidar_pose_i).R;
         t = pose(lidar_pose_i).t;
-        
+
         for plane_i = 1:plane_num
             B_sets_single = B_sets{lidar_pose_i, plane_i};
             n = plane.normal_vector_list{1, plane_i};
             d = plane.q_list{1, plane_i};
 
-            T = eye(4,4);
-            T(1:3,1:3) = R;
-            T(1:3,4) = t';
+            T = eye(4, 4);
+            T(1:3, 1:3) = R;
+            T(1:3, 4) = t';
             B_sets_global = T * B_sets_single * T';
 
             total_error = total_error + [n;d]' * B_sets_global * [n;d];

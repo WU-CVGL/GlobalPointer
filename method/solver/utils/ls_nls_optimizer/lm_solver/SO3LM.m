@@ -41,11 +41,11 @@ function [x_opt, Residual] = SO3LM(opt_func, update_func, x, varargin)
 
     [F,J] = Calculate_F_J(x, opt_func, update_func, params);
     F = reshape(F, size(F, 1) * size(F, 2), 1);
-    sqSumF = dot(F,F);
+    sqSumF = dot(F, F);
     Residual = sqSumF;
-    H = J'*J;
-    JtF = J'*F;
-    linf_JtF=max(norm(JtF,Inf),sqrtEps); 
+    H = J' * J;
+    JtF = J' * F;
+    linf_JtF=max(norm(JtF,Inf), sqrtEps); 
     disp_local([num2str(iter) ' : ' num2str(sqSumF)], params.Results.Debug);
 
     while iter < params.Results.MaxIteration
@@ -57,15 +57,15 @@ function [x_opt, Residual] = SO3LM(opt_func, update_func, x, varargin)
         x_LM = update_func(x, dp');    
         l2_dp=norm(dp);
         
-        if (l2_dp < tolX*(sqrtEps + l2_p) )
+        if (l2_dp < tolX * (sqrtEps + l2_p) )
             disp_local('Finished (tolX)', params.Results.Debug);
             break;
         end
 
-        [F_LM,J_LM] = Calculate_F_J(x_LM, opt_func, update_func, params);
+        [F_LM, J_LM] = Calculate_F_J(x_LM, opt_func, update_func, params);
         F_LM = reshape(F_LM, size(F_LM, 1) * size(F_LM, 2), 1);
         sqSumF_LM = dot(F_LM,F_LM);
-        JtF_LM = J_LM'*F_LM;
+        JtF_LM = J_LM' * F_LM;
         linf_JtF_LM=max(norm(JtF_LM,Inf),sqrtEps);
         
         if (linf_JtF_LM < tolOpt * linf_JtF)
@@ -84,7 +84,7 @@ function [x_opt, Residual] = SO3LM(opt_func, update_func, x, varargin)
             sqSumF = sqSumF_LM;
             disp_local([num2str(iter) ' : ' num2str(sqSumF)], params.Results.Debug);
             Residual = [Residual, sqSumF];
-            H = J_LM'*J_LM;
+            H = J_LM' * J_LM;
             JtF = JtF_LM;
         else
             lambda=lambda*10;
@@ -100,12 +100,12 @@ function [x_opt, Residual] = SO3LM(opt_func, update_func, x, varargin)
 end
 
 
-function [F,J] = Calculate_F_J(x, opt_func, update_func, params)
+function [F, J] = Calculate_F_J(x, opt_func, update_func, params)
 
     if params.Results.AutoFConstruction
         if params.Results.SpecifyObjectiveGradient
             functor = @(x_s)F_J_AutoConstruct(x_s, opt_func, params.Results.AutoFConstructionObs, params.Results.ParallelErrorCalculation);
-            [F,J] = functor(x); 
+            [F, J] = functor(x); 
             if params.Results.CheckGradient
                 J_num = NumericalDiff(x, F, functor, update_func, params.Results.ParallelNumericalDiff);
                 disp_local(['Check Gradient', num2str(vec(J - J_num))], params.Results.Debug);

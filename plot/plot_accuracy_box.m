@@ -57,7 +57,7 @@ function plot_accuracy_box(results, method_list, plot_list, x_axis_list, title_l
 
         x_list = categorical(x_list, x_axis_list);
         figure
-        boxchart(x_list,y_list,'GroupByColor',label_list);
+        boxchart(x_list,y_list, 'GroupByColor', label_list);
         title(title_list(1, error_i));
         xlabel(x_axis_title);
         ylabel(y_axis_title);

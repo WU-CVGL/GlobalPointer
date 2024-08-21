@@ -10,7 +10,7 @@
 %                              Zhenjun Zhao (ericzzj89[at]gmail[dot]com)
 %                              Peidong Liu (liupeidong[at]westlake[dot]edu[dot]cn)
 
-function [F,J] = ej_full_so3_func(x, point_cloud_cell)
+function [F, J] = ej_full_so3_func(x, point_cloud_cell)
     
     lidar_pose_num = size(point_cloud_cell, 1);
     plane_num = size(point_cloud_cell, 2);
@@ -47,7 +47,6 @@ function [F,J] = ej_full_so3_func(x, point_cloud_cell)
 
             F_cell{lidar_pose_i, plane_i} = F_single;
             J_cell{lidar_pose_i, plane_i} = J_single;
-            
         end
     end
 

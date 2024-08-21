@@ -24,10 +24,10 @@ function [solution_struct, time_record, error_record, Residual] = Decouple_PA_GP
     B_sqrt_cell = B_sets;
     for i = 1:size(B_sets, 1)
         for j = 1:size(B_sets, 2)
-            if sum(B_sets{i,j},'all') == 0
-                B_sqrt_cell{i,j} = zeros(4,4);
+            if sum(B_sets{i, j},'all') == 0
+                B_sqrt_cell{i, j} = zeros(4, 4);
             else
-                B_sqrt_cell{i,j} = chol(B_sets{i,j}+diag([1,1,1,1])*1e-5)';
+                B_sqrt_cell{i, j} = chol(B_sets{i,j}+diag([1, 1, 1, 1]) * 1e-5)';
             end
             
         end
@@ -37,11 +37,11 @@ function [solution_struct, time_record, error_record, Residual] = Decouple_PA_GP
     B_sqrt_plane_cell = cell(1, param.plane_num);
 
     for i = 1:param.lidar_pose_num
-        B_sqrt_pose_cell{i,1} = B_sqrt_cell(i,:);
+        B_sqrt_pose_cell{i, 1} = B_sqrt_cell(i,:);
     end
 
     for i = 1:param.plane_num
-        B_sqrt_plane_cell{1,i} = B_sqrt_cell(:,i);
+        B_sqrt_plane_cell{1, i} = B_sqrt_cell(:,i);
     end
 
     for iter = 1:200

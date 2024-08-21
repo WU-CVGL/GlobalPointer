@@ -32,7 +32,7 @@ function plot_time_box(results, method_list, plot_list, x_axis_list, title_time,
             time_single = [];
             for iteration_i = 1:iteration_size_num
                 if time_all(epoch_i, iteration_i) ~= 0
-                    time_single = [time_single;time_all(epoch_i, iteration_i)];
+                    time_single = [time_single; time_all(epoch_i, iteration_i)];
                 end
             end
             if is_log10
@@ -42,7 +42,7 @@ function plot_time_box(results, method_list, plot_list, x_axis_list, title_time,
             end
             x_tmp_list = [x_tmp_list; repmat(x_axis_list(1, epoch_i), size(time_single))];
         end
-        
+
         x_list = [x_list; x_tmp_list];
         y_list = [y_list; y_tmp_list];
         label_list = [label_list;repmat(plot_method, size(x_tmp_list))];
@@ -50,7 +50,7 @@ function plot_time_box(results, method_list, plot_list, x_axis_list, title_time,
 
     x_list = categorical(x_list, x_axis_list);
     figure
-    boxchart(x_list,y_list,'GroupByColor',label_list);
+    boxchart(x_list, y_list, 'GroupByColor', label_list);
     title(title_time);
     xlabel(x_axis_title);
     ylabel(y_axis_title);

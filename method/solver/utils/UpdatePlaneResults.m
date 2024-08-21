@@ -16,7 +16,7 @@ function [plane_estimate_struct,plane_estimate_matrix,optimal_plane_vec] = Updat
 
     for plane_i = 1:param.plane_num
         [~, S, V] = svd(X_list{1, plane_i});
-        A = S*V';
+        A = S * V';
         x_solution = A(1, :);
         x_solution = x_solution / norm(x_solution(1, 1:3));
 
@@ -25,7 +25,7 @@ function [plane_estimate_struct,plane_estimate_matrix,optimal_plane_vec] = Updat
     end
 
     plane_estimate_matrix = zeros(4, param.plane_num);
-    
+
     for plane_i = 1:param.plane_num
         plane_estimate_matrix(:, plane_i) = [plane_estimate_struct.normal_vector_list{plane_i}; plane_estimate_struct.q_list{plane_i}];
     end

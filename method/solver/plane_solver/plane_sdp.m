@@ -13,12 +13,15 @@
 function X_list = plane_sdp(C_sets, param)
     
     X_list = cell(1, param.plane_num);
+
     yalmip('clear');
+
     X = sdpvar(4, 4);
     A = zeros(4, 4);
     A(1, 1) = 1;
     A(2, 2) = 1;
     A(3, 3) = 1;
+    
     Constraints = [X >= 0, trace(A* X) == 1];
     C_sdp = sdpvar(4, 4);
     Objective = trace(C_sdp * X);

@@ -49,9 +49,9 @@ function [plane_struct, lidar_pose_struct, B_sets] = generate_Bset_on_plane(para
     plane_struct_tmp.normal_placement_vector = cell(1, param.plane_num);
 
     for plane_i = 1:param.plane_num
-        basevec1 = rand(3,1) * 2 - 1;
+        basevec1 = rand(3, 1) * 2 - 1;
         basevec1 = basevec1 / norm(basevec1);
-        basevec2 = rand(3,1) * 2 - 1;
+        basevec2 = rand(3, 1) * 2 - 1;
         basevec2 = basevec2 / norm(basevec2);
         normalvec = cross(basevec1, basevec2);
         normalvec = normalvec / norm(normalvec);
@@ -68,7 +68,7 @@ function [plane_struct, lidar_pose_struct, B_sets] = generate_Bset_on_plane(para
         % --- get plane parameters ---
         plane_struct.normal_vector_gt_list{1, plane_i} = normalvec;
         plane_struct.q_gt_list{1, plane_i} = mean(point_cloud_global)';
-        
+
         if param.randn_plane
             plane_struct.normal_vector_list{1, plane_i} = randn(3, 1);
             plane_struct.q_list{1, plane_i} = randn(3, 1);
@@ -95,7 +95,7 @@ function [plane_struct, lidar_pose_struct, B_sets] = generate_Bset_on_plane(para
 
             point_cloud_global = point_cloud_global_gt + randn(size(point_cloud_global_gt)) * param.randn_point_noise;
             point_cloud_local = (point_cloud_global - t) * R;
-            point_local_homo = [point_cloud_local, ones(size(point_cloud_local,1),1)];
+            point_local_homo = [point_cloud_local, ones(size(point_cloud_local, 1), 1)];
             B_sets{lidar_pose_i, plane_i} = point_local_homo' * point_local_homo;
         end 
     end

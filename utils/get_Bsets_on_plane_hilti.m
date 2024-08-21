@@ -35,8 +35,8 @@ function [plane_struct, lidar_pose_struct, B_sets, param] = get_Bsets_on_plane_h
 
     % -------- loda B sets --------
     load(Bsets_path);
-    param.plane_num = size(B_sets,2);
-    param.lidar_pose_num = size(B_sets,1);
+    param.plane_num = size(B_sets, 2);
+    param.lidar_pose_num = size(B_sets, 1);
 
     if param.fix_lidar_scan ~= 0 && param.lidar_pose_num >= param.fix_lidar_scan
         overlap_winsize = 4 * ceil(param.lidar_pose_num / param.fix_lidar_scan) + 1;
@@ -44,9 +44,9 @@ function [plane_struct, lidar_pose_struct, B_sets, param] = get_Bsets_on_plane_h
         fix_id_cell = zeros(1, param.fix_lidar_scan);
 
         for i = 1:param.fix_lidar_scan
-            fix_id_cell(1,i) = min(ceil(param.lidar_pose_num / param.fix_lidar_scan * i), param.lidar_pose_num);
-            first_id = max(1, fix_id_cell(1,i) - (overlap_winsize-1) / 2);
-            sec_id = min(param.lidar_pose_num, fix_id_cell(1,i) + (overlap_winsize-1) / 2);
+            fix_id_cell(1, i) = min(ceil(param.lidar_pose_num / param.fix_lidar_scan * i), param.lidar_pose_num);
+            first_id = max(1, fix_id_cell(1, i) - (overlap_winsize - 1) / 2);
+            sec_id = min(param.lidar_pose_num, fix_id_cell(1, i) + (overlap_winsize - 1) / 2);
             win_id_cell{i, 1} = randperm(param.lidar_pose_num,overlap_winsize);
         end
 
@@ -56,15 +56,15 @@ function [plane_struct, lidar_pose_struct, B_sets, param] = get_Bsets_on_plane_h
             fix_id = fix_id_cell(1,i);
 
             T_tar = eye(4);
-            T_tar(1:3,1:3) = lidar_pose_struct(fix_id).R_gt;
-            T_tar(1:3,4) = lidar_pose_struct(fix_id).t_gt;
+            T_tar(1:3, 1:3) = lidar_pose_struct(fix_id).R_gt;
+            T_tar(1:3, 4) = lidar_pose_struct(fix_id).t_gt;
 
             win_id_list = win_id_cell{i, 1};
             for j = 1:size(win_id_list, 2)
                 win_id = win_id_list(1, j);
                 T_src = eye(4);
-                T_src(1:3,1:3) = lidar_pose_struct(win_id).R_gt;
-                T_src(1:3,4) = lidar_pose_struct(win_id).t_gt;
+                T_src(1:3, 1:3) = lidar_pose_struct(win_id).R_gt;
+                T_src(1:3, 4) = lidar_pose_struct(win_id).t_gt;
                 T = inv(T_tar) * T_src;
 
                 for plane_i = 1:param.plane_num
@@ -87,7 +87,7 @@ function [plane_struct, lidar_pose_struct, B_sets, param] = get_Bsets_on_plane_h
     for j = 1:param.lidar_pose_num
         for i = 1:param.plane_num
             B_single = B_sets{j, i};
-            if B_single(4,4) ~= 0
+            if B_single(4, 4) ~= 0
                 B_m(j, i) = 1;
             end
         end
@@ -98,29 +98,29 @@ function [plane_struct, lidar_pose_struct, B_sets, param] = get_Bsets_on_plane_h
     plane_struct.q_gt_list = cell(1, param.plane_num);
 
     for plane_i = 1:param.plane_num
-        B_single = zeros(4,4);
+        B_single = zeros(4, 4);
         for pose_i = 1:param.lidar_pose_num
             B = B_sets{pose_i, plane_i};
             if sum(B,"all") == 0
                 continue
             end
-            B_sets{pose_i, plane_i} = B / B(4,4);
+            B_sets{pose_i, plane_i} = B / B(4, 4);
             T = eye(4);
-            T(1:3,1:3) = lidar_pose_struct(pose_i).R_gt;
-            T(1:3,4) = lidar_pose_struct(pose_i).t_gt;
+            T(1:3, 1:3) = lidar_pose_struct(pose_i).R_gt;
+            T(1:3, 4) = lidar_pose_struct(pose_i).t_gt;
             B_single = B_single + T * B_sets{pose_i, plane_i} * T';
         end
 
-        B_single = B_single / B_single(4,4);
+        B_single = B_single / B_single(4, 4);
         [V, D, ~] = eig(B_single);
 
         [~, ind] = sort(diag(D));
         Vs = V(:,ind);
-        nq = Vs(:,1);
+        nq = Vs(:, 1);
         nq = nq / norm(nq(1:3));
         plane_struct.normal_vector_gt_list{1, plane_i} = nq(1:3);
-        d = - nq(1:3)' * B_single(1:3,4);
-        plane_struct.q_gt_list{1, plane_i} = B_single(1:3,4) / d * nq(4);
+        d = - nq(1:3)' * B_single(1:3, 4);
+        plane_struct.q_gt_list{1, plane_i} = B_single(1:3, 4) / d * nq(4);
     end
 
     Dis_m = zeros(param.lidar_pose_num, param.lidar_pose_num);
@@ -128,7 +128,7 @@ function [plane_struct, lidar_pose_struct, B_sets, param] = get_Bsets_on_plane_h
         B_single = B_m(j, :);
         B_dis = B_m - B_single;
         Dis_single = vecnorm(B_dis');
-        Dis_m(j,:) = Dis_single;
+        Dis_m(j, :) = Dis_single;
     end
 
 end

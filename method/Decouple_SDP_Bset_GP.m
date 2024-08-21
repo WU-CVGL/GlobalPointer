@@ -62,7 +62,6 @@ function [solution_struct, time_record, error_record, Residual] = Decouple_SDP_B
 
         % ---- stop check ----
         if StopCheck(error_record.total_error_list, runtime_param)
-            
             break;
         end
     end

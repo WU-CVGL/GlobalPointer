@@ -29,10 +29,9 @@ function [lidar_pose_estimate_vec, plane_estimate_vec] = PrepareVariableVec(lida
             plane_estimate_vec(:, plane_i) = [plane_struct.normal_vector_list{plane_i}; -plane_struct.q_list{plane_i}' * plane_struct.normal_vector_list{plane_i}];
         else
             plane_estimate_vec(:, plane_i) = [plane_struct.normal_vector_list{plane_i}; plane_struct.q_list{plane_i}];
-        end
-        
+        end 
     end
-    
+
     plane_estimate_vec = reshape(plane_estimate_vec, [1, 4 * param.plane_num]);
 
 end

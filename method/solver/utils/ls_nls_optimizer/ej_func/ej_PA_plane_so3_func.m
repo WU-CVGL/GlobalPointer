@@ -10,7 +10,7 @@
 %                              Zhenjun Zhao (ericzzj89[at]gmail[dot]com)
 %                              Peidong Liu (liupeidong[at]westlake[dot]edu[dot]cn)
 
-function [F,J] = ej_PA_plane_so3_func(x, pose, B_sqrt_cell)
+function [F, J] = ej_PA_plane_so3_func(x, pose, B_sqrt_cell)
     
     lidar_pose_num = size(B_sqrt_cell, 1);
     plane_num = 1;
