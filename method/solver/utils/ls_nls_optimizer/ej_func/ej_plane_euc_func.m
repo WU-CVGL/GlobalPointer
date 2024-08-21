@@ -1,3 +1,15 @@
+% This function is part of the GlobalPointer method as described in [1]. When you
+% use this code, you are required to cite [1].
+% 
+% [1] GlobalPointer: Large-Scale Plane Adjustment with Bi-Convex Relaxation
+% Author: B. Liao, Z. Zhao, L. Chen, H. Li, D. Cremers, P. Liu.
+% European Conference on Computer Vision 2024 (ECCV 2024)
+%
+% 
+% Author & Copyright (C) 2024: Bangyan Liao (liaobangyan[at]westlake[dot]edu[dot]cn)
+%                              Zhenjun Zhao (ericzzj89[at]gmail[dot]com)
+%                              Peidong Liu (liupeidong[at]westlake[dot]edu[dot]cn)
+
 function [F,J] = ej_plane_euc_func(x, y, point_cloud_cell)
 
     lidar_pose_num = size(point_cloud_cell, 1);
@@ -5,7 +17,6 @@ function [F,J] = ej_plane_euc_func(x, y, point_cloud_cell)
     
     F_cell = cell(lidar_pose_num, plane_num);
     J_cell = cell(lidar_pose_num, plane_num);
-
 
     for lidar_pose_i = 1:lidar_pose_num
         pose_id = (lidar_pose_i - 1) * 6;
@@ -42,12 +53,12 @@ function [F,J] = ej_plane_euc_func(x, y, point_cloud_cell)
         end
     end
 
-
     F_cell = reshape(F_cell, [1, lidar_pose_num * plane_num]);
     J_cell = reshape(J_cell, [lidar_pose_num * plane_num, 1]);
 
     F_reg = zeros(1, plane_num);
     J_reg = zeros(plane_num, plane_num * 4);
+    
     for plane_i = 1:plane_num
         plane_id = (plane_i - 1) * 4;
         nx = y(1,plane_id+1);
@@ -61,9 +72,7 @@ function [F,J] = ej_plane_euc_func(x, y, point_cloud_cell)
         J_reg(plane_i, :) = J_tmp;
     end
 
-
     F = [cell2mat(F_cell),F_reg];
     J = [cell2mat(J_cell);J_reg];
-
     
 end

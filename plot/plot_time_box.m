@@ -1,9 +1,20 @@
+% This function is part of the GlobalPointer method as described in [1]. When you
+% use this code, you are required to cite [1].
+% 
+% [1] GlobalPointer: Large-Scale Plane Adjustment with Bi-Convex Relaxation
+% Author: B. Liao, Z. Zhao, L. Chen, H. Li, D. Cremers, P. Liu.
+% European Conference on Computer Vision 2024 (ECCV 2024)
+%
+% 
+% Author & Copyright (C) 2024: Bangyan Liao (liaobangyan[at]westlake[dot]edu[dot]cn)
+%                              Zhenjun Zhao (ericzzj89[at]gmail[dot]com)
+%                              Peidong Liu (liupeidong[at]westlake[dot]edu[dot]cn)
+
 function plot_time_box(results, method_list, plot_list, x_axis_list, title_time, is_log10, y_axis_title, x_axis_title)
     
     epoch_size_num = size(results{1, 1}.error, 1);
     iteration_size_num = size(results{1, 1}.error, 2);
     method_size_num = size(plot_list, 2);
-
 
     x_list = [];
     y_list = [];
@@ -31,10 +42,10 @@ function plot_time_box(results, method_list, plot_list, x_axis_list, title_time,
             end
             x_tmp_list = [x_tmp_list; repmat(x_axis_list(1, epoch_i), size(time_single))];
         end
+        
         x_list = [x_list; x_tmp_list];
         y_list = [y_list; y_tmp_list];
         label_list = [label_list;repmat(plot_method, size(x_tmp_list))];
-
     end
 
     x_list = categorical(x_list, x_axis_list);
@@ -45,6 +56,5 @@ function plot_time_box(results, method_list, plot_list, x_axis_list, title_time,
     ylabel(y_axis_title);
     legend;
     set(gcf, 'color', 'w');
-    
-        
+
 end

@@ -1,4 +1,17 @@
+% This function is part of the GlobalPointer method as described in [1]. When you
+% use this code, you are required to cite [1].
+% 
+% [1] GlobalPointer: Large-Scale Plane Adjustment with Bi-Convex Relaxation
+% Author: B. Liao, Z. Zhao, L. Chen, H. Li, D. Cremers, P. Liu.
+% European Conference on Computer Vision 2024 (ECCV 2024)
+%
+% 
+% Author & Copyright (C) 2024: Bangyan Liao (liaobangyan[at]westlake[dot]edu[dot]cn)
+%                              Zhenjun Zhao (ericzzj89[at]gmail[dot]com)
+%                              Peidong Liu (liupeidong[at]westlake[dot]edu[dot]cn)
+
 function [RedundantA, RedundantB] = GetRotationRedundantConstraint()
+
     RedundantA = cell(21, 1);
     RedundantB = zeros(21, 1);
     
@@ -88,7 +101,6 @@ function [RedundantA, RedundantB] = GetRotationRedundantConstraint()
     RedundantA{12} = QuadraticMatrix;
     RedundantB(12) = 0;
 
-
     % -------------- R times R --------------
     QuadraticMatrix = zeros(10, 10);
     QuadraticMatrix(4, 8) = 1;
@@ -152,8 +164,6 @@ function [RedundantA, RedundantB] = GetRotationRedundantConstraint()
     QuadraticMatrix(8, 10) = -1;
     RedundantA{21} = QuadraticMatrix;
     RedundantB(21) = 0;
-
-
 
     for i = 1:21
         raw_matrix = RedundantA{i};
