@@ -5,22 +5,21 @@
 <a href="https://arxiv.org/abs/2407.13537"><img src="https://img.shields.io/badge/arXiv-2407.13537-b31b1b.svg"></a>
 <a href="https://bangyan101.github.io/GlobalPointer/"><img src="https://img.shields.io/badge/Project-Page-green.svg"/></a>
 
-This is an official implementation of our ECCV 2024 paper 
-[**GlobalPointer**: Large-Scale Plane Adjustment with Bi-Convex Relaxation](https://bangyan101.github.io/GlobalPointer/).
+This is the official implementation of our ECCV 2024 paper, [**GlobalPointer**: Large-Scale Plane Adjustment with Bi-Convex Relaxation](https://bangyan101.github.io/GlobalPointer/).
 
 
 ## Requirement
-1. Matlab r2023a
-2. Yalmip [Version R20230622](https://yalmip.github.io/R20230622)
+1. MATLAB r2023a
+2. YALMIP [Version R20230622](https://yalmip.github.io/R20230622)
 3. MOSEK [Version 10.1.11](https://www.mosek.com/downloads/10.1.11/)
 
 
 ## Replace TODO codes
-1. Find our main matlab script in **main/sythetic_main.mlx** and replace the following codes.
+1. Find our main MATLAB script in **main/sythetic_main.mlx** and replace the following code.
 
-2. Replace `PATH_TO_YALMIP` and `PATH_TO_MOSEK` with your own YALMIP and MOSEK solver path respectively.
+2. Replace `PATH_TO_YALMIP` and `PATH_TO_MOSEK` with the paths to your own YALMIP and MOSEK solvers, respectively.
 
-3. Replace `PATH_TO_PROJECT` with your own project root path.
+3. Replace `PATH_TO_PROJECT` with the path to your project root.
 ```
 % ---------------------- TODO ----------------------
 addpath(genpath("PATH_TO_YALMIP\YALMIP-master"))
@@ -32,10 +31,10 @@ addpath(genpath(root_path))
 
 
 ## Select experiment 
-we provide three full experiment setups
-- increasing point cloud noise
-- increasing pose initialization noise
-- increasing number of poses and planes
+We provide three full experiment setups:
+- Increasing point cloud noise
+- Increasing pose initialization noise
+- Increasing the number of poses and planes
 ```
 % ---------------------- Experiment Selection Setup ----------------------
 % please select your experiment setup
@@ -48,8 +47,7 @@ param.increasing_scale = true;
 
 ## Example results
 ![example results](./exp.png "Example Results")
-These are example results affter running above codes. As shown in these figures, 
-we test our method against classical nonlinear least-square method, classical plane adjustment method and their decoupled variants.
+These are example results after running the above code. As shown in these figures, we test our method against the classical nonlinear least-squares method, the classical plane adjustment method, and their decoupled variants.
 
 
 
