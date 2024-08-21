@@ -47,6 +47,10 @@ param.increasing_scale = true;
 
 
 ## Example results
+![example results](./exp.png "Example Results")
+These are example results affter running above codes. As shown in these figures, 
+we test our method against classical nonlinear least-square method, classical plane adjustment method and their decoupled variants.
+
 
 
 ## Citation
