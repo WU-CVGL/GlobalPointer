@@ -59,8 +59,8 @@ If you find our work useful in your research, please consider citing:
 
 ```
 @inproceedings{Liao2024GlobalPointer,
-    author 	= { Bangyan Liao and Zhenjun Zhao and Lu Chen and Haoang Li and Daniel Cremers and Peidong Liu },
-    title 	= { GlobalPointer: Large-Scale Plane Adjustment with Bi-Convex Relaxation},
+    author 	= {Bangyan Liao and Zhenjun Zhao and Lu Chen and Haoang Li and Daniel Cremers and Peidong Liu},
+    title 	= {GlobalPointer: Large-Scale Plane Adjustment with Bi-Convex Relaxation},
     booktitle = {European Conference on Computer Vision (ECCV)},
     year 	= 2024,
     keywords = {Plane Adjustment, Semidefinite Programming (SDP), Convex Relaxation}
