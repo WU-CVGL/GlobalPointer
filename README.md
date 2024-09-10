@@ -4,6 +4,7 @@
 
 <a href="https://arxiv.org/abs/2407.13537"><img src="https://img.shields.io/badge/arXiv-2407.13537-b31b1b.svg"></a>
 <a href="https://bangyan101.github.io/GlobalPointer/"><img src="https://img.shields.io/badge/Project-Page-green.svg"/></a>
+<a href="[https://www.youtube.com/watch?v=xoES4eONYoA](https://www.youtube.com/watch?v=whmoRxRxSQc)"><img src="https://img.shields.io/badge/YouTube-%23FF0000.svg?style=flat&logo=YouTube&logoColor=white" height=22.5></a>
 
 This is the official implementation of our ECCV 2024 paper, [**GlobalPointer**: Large-Scale Plane Adjustment with Bi-Convex Relaxation](https://bangyan101.github.io/GlobalPointer/).
 
