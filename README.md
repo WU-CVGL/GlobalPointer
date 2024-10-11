@@ -2,19 +2,34 @@
   <h1 align="center"> <ins>GlobalPointer</ins> ⚡️<br>Large-Scale Plane Adjustment with Bi-Convex Relaxation</h1>
 </p>
 
-<a href="https://arxiv.org/abs/2407.13537"><img src="https://img.shields.io/badge/arXiv-2407.13537-b31b1b.svg"></a>
-<a href="https://bangyan101.github.io/GlobalPointer/"><img src="https://img.shields.io/badge/Project-Page-green.svg"/></a>
+<h3 align="center">ECCV 2024</h3>
+
+<p align="center">
+  <a href="https://arxiv.org/abs/2407.13537"><img src="https://img.shields.io/badge/arXiv-2407.13537-b31b1b.svg"></a>
+  <a href="https://bangyan101.github.io/GlobalPointer/"><img src="https://img.shields.io/badge/Project-Page-green.svg"/></a>
+</p>
 
 This is the official implementation of our ECCV 2024 paper, [**GlobalPointer**: Large-Scale Plane Adjustment with Bi-Convex Relaxation](https://bangyan101.github.io/GlobalPointer/).
 
 
-## Requirement
+<p align="center">
+  <a href="https://arxiv.org/abs/2407.13537">
+    <img src="./media/teaser.png" alt="Logo" width=100%>
+  </a>
+  <br>
+  <em>A globally optimal and efficient large-scale plane adjustment, using alternating minimization and convex relaxation techniques.</em>
+</p>
+
+
+## Setup
 1. MATLAB r2023a
 2. YALMIP [Version R20230622](https://yalmip.github.io/R20230622)
 3. MOSEK [Version 10.1.11](https://www.mosek.com/downloads/10.1.11/)
 
 
-## Replace TODO codes
+## Running
+
+### Replace TODO codes
 1. Find our main MATLAB script in **main/sythetic_main.mlx** and replace the following code.
 
 2. Replace `PATH_TO_YALMIP` and `PATH_TO_MOSEK` with the paths to your own YALMIP and MOSEK solvers, respectively.
@@ -29,8 +44,7 @@ addpath(genpath(root_path))
 % ---------------------- TODO END ----------------------
 ```
 
-
-## Select experiment 
+### Select experiment 
 We provide three full experiment setups:
 - Increasing point cloud noise
 - Increasing pose initialization noise
@@ -46,7 +60,7 @@ param.increasing_scale = true;
 
 
 ## Example results
-![example results](./exp.png "Example Results")
+![example results](./media/exp.png "Example Results")
 These are example results after running the above code. As shown in these figures, we test our method against the classical nonlinear least-squares method, the classical plane adjustment method, and their decoupled variants.
 
 
